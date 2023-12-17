@@ -1,0 +1,523 @@
+{
+	"info": {
+		"_postman_id": "51dfe5ee-73dd-4c5a-9e25-4c127f234cfd",
+		"name": "Vending",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "25483670"
+	},
+	"item": [
+		{
+			"name": "users",
+			"item": [
+				{
+					"name": "user",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"username\": \"buyer\",\r\n    \"password\": \"buyer\",\r\n    \"role\":\"BUYER\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8002/api/v1/users",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8002",
+							"path": [
+								"api",
+								"v1",
+								"users"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "reset Balance",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{buyerToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PATCH",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8002/api/v1/users/reset-balance",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8002",
+							"path": [
+								"api",
+								"v1",
+								"users",
+								"reset-balance"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "deposit",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{buyerToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"COIN_100_CENT\":1,\r\n    \"COIN_10_CENT\":2  \r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8002/api/v1/users/deposit",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8002",
+							"path": [
+								"api",
+								"v1",
+								"users",
+								"deposit"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "products",
+			"item": [
+				{
+					"name": "all products",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8002/api/v1/products",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8002",
+							"path": [
+								"api",
+								"v1",
+								"products"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "product by ID",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8002/api/v1/products/{{product_id}}",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8002",
+							"path": [
+								"api",
+								"v1",
+								"products",
+								"{{product_id}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "add Product",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{sellerToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"amountAvailable\": \"5\",\r\n    \"cost\": \"10\",\r\n    \"productName\": \"سباتس\",\r\n    \"sellerId\": \"seller\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8002/api/v1/products",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8002",
+							"path": [
+								"api",
+								"v1",
+								"products"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "product",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{sellerToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\":1,\r\n    \"amountAvailable\": \"5\",\r\n    \"cost\": \"10\",\r\n    \"productName\": \"سباتس\",\r\n    \"sellerId\": \"seller\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8002/api/v1/products/{{product_id}}",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8002",
+							"path": [
+								"api",
+								"v1",
+								"products",
+								"{{product_id}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "product",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{sellerToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8002/api/v1/products/{{product_id}}",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8002",
+							"path": [
+								"api",
+								"v1",
+								"products",
+								"{{product_id}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "purchase",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{buyerToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8002/api/v1/products/{{product_id}}/purchase?productAmount=1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8002",
+							"path": [
+								"api",
+								"v1",
+								"products",
+								"{{product_id}}",
+								"purchase"
+							],
+							"query": [
+								{
+									"key": "productAmount",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Get Token",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "grant_type",
+							"value": "password",
+							"type": "text"
+						},
+						{
+							"key": "client_id",
+							"value": "vending",
+							"type": "text"
+						},
+						{
+							"key": "username",
+							"value": "buyer",
+							"type": "text"
+						},
+						{
+							"key": "password",
+							"value": "buyer",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost:8080/realms/vending/protocol/openid-connect/token",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"realms",
+						"vending",
+						"protocol",
+						"openid-connect",
+						"token"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "client login",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "grant_type",
+							"value": "client_credentials",
+							"type": "text"
+						},
+						{
+							"key": "client_id",
+							"value": "admin-cli",
+							"type": "text"
+						},
+						{
+							"key": "client_secret",
+							"value": "uScHlw6UJwgifuhaiIWzg7tuvuAxPZDn",
+							"type": "text"
+						},
+						{
+							"key": "password",
+							"value": "admin",
+							"type": "text",
+							"disabled": true
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost:8080/realms/vending/protocol/openid-connect/token",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"realms",
+						"vending",
+						"protocol",
+						"openid-connect",
+						"token"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					"const postRequest = {",
+					"  url: 'http://localhost:8080/realms/vending/protocol/openid-connect/token',",
+					"  method: 'POST',",
+					"  header: {",
+					"    'Content-Type': 'application/x-www-form-urlencoded',",
+					"  },",
+					"  body: {",
+					"    mode: 'urlencoded',",
+					"    urlencoded:",
+					"    [",
+					"        {key: \"client_id\",value: \"vending\"},",
+					"        {key: \"grant_type\",value: \"password\"},",
+					"        {key: \"username\",value: \"buyer\"},",
+					"        {key: \"password\",value: \"buyer\"}",
+					"    ]",
+					"  }",
+					"};",
+					"pm.sendRequest(postRequest, (error, response) => {",
+					"",
+					"  if (error) {",
+					"    console.log(error);",
+					"  }",
+					" console.log(response);",
+					"  pm.test('response should be okay to process', () => {",
+					"    pm.expect(error).to.equal(null);",
+					"    pm.expect(response).to.have.property('code', 200);",
+					"    pm.expect(response).to.have.property('status', 'OK');",
+					"    pm.collectionVariables.set(\"buyerToken\", response.json().access_token);",
+					"",
+					"  });",
+					"",
+					"});",
+					"const sellerRequest = {",
+					"  url: 'http://localhost:8080/realms/vending/protocol/openid-connect/token',",
+					"  method: 'POST',",
+					"  header: {",
+					"    'Content-Type': 'application/x-www-form-urlencoded',",
+					"  },",
+					"  body: {",
+					"    mode: 'urlencoded',",
+					"    urlencoded:",
+					"    [",
+					"        {key: \"client_id\",value: \"vending\"},",
+					"        {key: \"grant_type\",value: \"password\"},",
+					"        {key: \"username\",value: \"seller\"},",
+					"        {key: \"password\",value: \"seller\"}",
+					"    ]",
+					"  }",
+					"};",
+					"pm.sendRequest(sellerRequest, (error, response) => {",
+					"",
+					"  if (error) {",
+					"    console.log(error);",
+					"  }",
+					" console.log(response);",
+					"  pm.test('response should be okay to process', () => {",
+					"    pm.expect(error).to.equal(null);",
+					"    pm.expect(response).to.have.property('code', 200);",
+					"    pm.expect(response).to.have.property('status', 'OK');",
+					"    pm.collectionVariables.set(\"sellerToken\", response.json().access_token);",
+					"",
+					"  });",
+					"",
+					"});",
+					"",
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "product_id",
+			"value": "1"
+		},
+		{
+			"key": "sellerToken",
+			"value": "eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICJtcjhMeG5VU2dReTRWWlRVbjM2NmliZzRTWjhmQVFPT3kyOGI1cFJEbTBjIn0.eyJleHAiOjE3MDI2NjM0ODAsImlhdCI6MTcwMjY2MzE4MCwianRpIjoiODA4ZTAzNmEtYTliNy00NjRjLWJmM2YtMzFjNzI5NDUwOGQ5IiwiaXNzIjoiaHR0cDovL2xvY2FsaG9zdDo4MDgwL3JlYWxtcy92ZW5kaW5nIiwiYXVkIjoiYWNjb3VudCIsInN1YiI6ImEzNzljN2ZhLWEyZDUtNDA4Zi1iNmYxLTI3OTRkYzQ1YzY5ZSIsInR5cCI6IkJlYXJlciIsImF6cCI6InZlbmRpbmciLCJzZXNzaW9uX3N0YXRlIjoiNTlmYTljYzctNTIzOC00M2Q0LWJjMWYtYTAzNmM5YzBhNmQwIiwiYWNyIjoiMSIsImFsbG93ZWQtb3JpZ2lucyI6WyIvKiJdLCJyZWFsbV9hY2Nlc3MiOnsicm9sZXMiOlsiZGVmYXVsdC1yb2xlcy12ZW5kaW5nIiwib2ZmbGluZV9hY2Nlc3MiLCJ1bWFfYXV0aG9yaXphdGlvbiJdfSwicmVzb3VyY2VfYWNjZXNzIjp7InZlbmRpbmciOnsicm9sZXMiOlsiQlVZRVIiXX0sImFjY291bnQiOnsicm9sZXMiOlsibWFuYWdlLWFjY291bnQiLCJtYW5hZ2UtYWNjb3VudC1saW5rcyIsInZpZXctcHJvZmlsZSJdfX0sInNjb3BlIjoiZW1haWwgcHJvZmlsZSIsInNpZCI6IjU5ZmE5Y2M3LTUyMzgtNDNkNC1iYzFmLWEwMzZjOWMwYTZkMCIsImVtYWlsX3ZlcmlmaWVkIjpmYWxzZSwicHJlZmVycmVkX3VzZXJuYW1lIjoiYnV5ZXIiLCJnaXZlbl9uYW1lIjoiIiwiZmFtaWx5X25hbWUiOiIifQ.zvbnL7wV3RjZzxv6mj1mkvO09-UAx_Vgt7iSZMpDXzO92x6hlDtEOhYViBAZqkEpt4MIpBQ3czlZqMGwSomD_N3fBfE8YCAsFx1m4jbyLFuW4x-H1hHMan83MECw01G68f4fUj2xi0NmyqgOYA-Jc1_MSLUCx4Ez5tbSQfjqjsIAhbNblgCfLFa4NJA1hZOIDjVDo3KfW3wW1uEBFQq2UZ1GLAh9A8JDilqenhwmzemVg251GcS5UERNmHTqDqfh0xT2GwRvCX-7BRiMcuAG0rcZZffsv3IsAy-nIGs6Qmv4h2SQ8136_XmefrkZkWgB3Q0HuB6fTGjd2buZn8J4Ew"
+		},
+		{
+			"key": "buyerToken",
+			"value": "eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICJtcjhMeG5VU2dReTRWWlRVbjM2NmliZzRTWjhmQVFPT3kyOGI1cFJEbTBjIn0.eyJleHAiOjE3MDI2NjM0ODAsImlhdCI6MTcwMjY2MzE4MCwianRpIjoiODA4ZTAzNmEtYTliNy00NjRjLWJmM2YtMzFjNzI5NDUwOGQ5IiwiaXNzIjoiaHR0cDovL2xvY2FsaG9zdDo4MDgwL3JlYWxtcy92ZW5kaW5nIiwiYXVkIjoiYWNjb3VudCIsInN1YiI6ImEzNzljN2ZhLWEyZDUtNDA4Zi1iNmYxLTI3OTRkYzQ1YzY5ZSIsInR5cCI6IkJlYXJlciIsImF6cCI6InZlbmRpbmciLCJzZXNzaW9uX3N0YXRlIjoiNTlmYTljYzctNTIzOC00M2Q0LWJjMWYtYTAzNmM5YzBhNmQwIiwiYWNyIjoiMSIsImFsbG93ZWQtb3JpZ2lucyI6WyIvKiJdLCJyZWFsbV9hY2Nlc3MiOnsicm9sZXMiOlsiZGVmYXVsdC1yb2xlcy12ZW5kaW5nIiwib2ZmbGluZV9hY2Nlc3MiLCJ1bWFfYXV0aG9yaXphdGlvbiJdfSwicmVzb3VyY2VfYWNjZXNzIjp7InZlbmRpbmciOnsicm9sZXMiOlsiQlVZRVIiXX0sImFjY291bnQiOnsicm9sZXMiOlsibWFuYWdlLWFjY291bnQiLCJtYW5hZ2UtYWNjb3VudC1saW5rcyIsInZpZXctcHJvZmlsZSJdfX0sInNjb3BlIjoiZW1haWwgcHJvZmlsZSIsInNpZCI6IjU5ZmE5Y2M3LTUyMzgtNDNkNC1iYzFmLWEwMzZjOWMwYTZkMCIsImVtYWlsX3ZlcmlmaWVkIjpmYWxzZSwicHJlZmVycmVkX3VzZXJuYW1lIjoiYnV5ZXIiLCJnaXZlbl9uYW1lIjoiIiwiZmFtaWx5X25hbWUiOiIifQ.zvbnL7wV3RjZzxv6mj1mkvO09-UAx_Vgt7iSZMpDXzO92x6hlDtEOhYViBAZqkEpt4MIpBQ3czlZqMGwSomD_N3fBfE8YCAsFx1m4jbyLFuW4x-H1hHMan83MECw01G68f4fUj2xi0NmyqgOYA-Jc1_MSLUCx4Ez5tbSQfjqjsIAhbNblgCfLFa4NJA1hZOIDjVDo3KfW3wW1uEBFQq2UZ1GLAh9A8JDilqenhwmzemVg251GcS5UERNmHTqDqfh0xT2GwRvCX-7BRiMcuAG0rcZZffsv3IsAy-nIGs6Qmv4h2SQ8136_XmefrkZkWgB3Q0HuB6fTGjd2buZn8J4Ew"
+		}
+	]
+}

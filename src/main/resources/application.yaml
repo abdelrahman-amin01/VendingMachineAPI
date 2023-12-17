@@ -1,0 +1,46 @@
+server:
+  port: 8002
+spring:
+  mvc:
+    throw-exception-if-no-handler-found: true
+  datasource:
+    url: jdbc:postgresql://localhost:5432/vending
+    username: docker
+    password: docker
+  application:
+    name: vending-service
+  jpa:
+    open-in-view: false
+    database-platform: org.hibernate.spatial.dialect.postgis.PostgisPG93Dialect
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate.show_sql: true
+      hibernate.use_sql_comments: true
+      hibernate.format_sql: true
+      hibernate.dialect: org.hibernate.spatial.dialect.postgis.PostgisPG93Dialect
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          issuer-uri: http://localhost:8080/realms/vending
+          jwk-set-uri: ${spring.security.oauth2.resourceserver.jwt.issuer-uri}/protocol/openid-connect/certs
+jwt:
+  auth:
+    converter:
+      resource-id: vending
+      principal-attribute: preferred_username
+
+logging:
+  level:
+    org.springframework.security: DEBUG
+
+
+keycloak:
+  realm: vending
+  auth-server-url: http://localhost:8080
+  ssl-required: external
+  resource: admin-cli
+  credentials:
+    secret: LYMmTNCWnbKjv3HOjroTYHAMQA5jsamO
+  use-resource-role-mappings: true
